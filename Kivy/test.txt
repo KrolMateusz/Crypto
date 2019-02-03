@@ -1,0 +1,8 @@
+1. Odszyfruj wiadomość z pliku kryptogram.txt
+szyfrem kolumnowym kluczem 12.
+2. Zaszyfruj wiadomość: "This is my secret message"
+szyfrem Cezara o kluczu 3,
+a następnie przeprowadź analizę częstości
+otrzymanego tekstu
+3. Przeprowadź kryptoanalizę kryptogramu
+w pliku kryptogram.txt szyfrem kolumnowym.

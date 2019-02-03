@@ -1,0 +1,358 @@
+#:kivy 1.10.0
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+#: import Clipboard kivy.core.clipboard.Clipboard
+
+ScreenManagement:
+    transition: FadeTransition()
+    EncryptionScreen:
+    DecryptionScreen:
+    CryptanalysisScreen:
+    BarScreen:
+    HelpScreen:
+
+<CustomButton@Button>:
+    text_size: self.width, None
+    size: self.texture_size
+    valign: 'middle'
+    halign: 'center'
+
+<EncryptionScreen>:
+    name: 'encrypt'
+    user_message_text_input: user_message
+    user_key_text_input: user_key
+    hidden_message_text: hidden_message
+    user_cipher_text: user_cipher
+
+    GridLayout:
+        rows: 4
+        padding: 5
+
+        BoxLayout:
+            size_hint_y: .2
+            orientation: 'vertical'
+
+            Label:
+                text: 'Wybierz metode szyfrowania:'
+                size_hint_y: .35
+            Spinner:
+                id: user_cipher
+                text: 'Szyfr afiniczny'
+                values: ('Szyfr afiniczny', 'Szyfr Cezara', 'Szyfr podstawieniowy', 'Szyfr kolumnowy', 'Szyfr Vigenere')
+
+        BoxLayout:
+            size_hint_y: .35
+            orientation: 'vertical'
+
+            BoxLayout:
+                size_hint_y: .3
+                Label:
+                    text: 'Wprowadz wiadomosc'
+                Label:
+                    text: 'Wprowadz klucz'
+            BoxLayout:
+                size_hint_y: .7
+                TextInput:
+                    id: user_message
+                TextInput:
+                    id: user_key
+
+        BoxLayout:
+            ScrollView:
+                size_hint: 1, 1
+                GridLayout:
+                    size_hint: 1, None
+                    height: self.minimum_height
+                    cols: 1
+                    Label:
+                        id: hidden_message
+                        size_hint: 1, None
+                        text_size: self.width, None
+                        height: self.texture_size[1]
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_x: .2
+                spacing: 5
+                Label:
+                CustomButton:
+                    text: 'Zatwierdz'
+                    on_press: root.hide_message(user_message, user_key)
+                CustomButton:
+                    text: 'Wyczysc wiadomosc'
+                    on_press: root.clear_message()
+                CustomButton:
+                    text: 'Wyczysc klucz'
+                    on_press: root.clear_key()
+                CustomButton:
+                    text: 'Kopiuj szyfrogram'
+                    on_press: Clipboard.copy(hidden_message.text)
+                Label:
+
+        BoxLayout:
+            size_hint_y: .15
+            CustomButton:
+                text: 'Szyfrowanie'
+                on_release: app.root.current = 'encrypt'
+            CustomButton:
+                text: 'Deszyfrowanie'
+                on_release: app.root.current = 'decrypt'
+            CustomButton:
+                text: 'Kryptoanaliza'
+                on_release: app.root.current = 'analysis'
+            CustomButton:
+                text: 'Analiza czestosci'
+                on_release: app.root.current = 'frequency'
+            CustomButton:
+                text: 'Pomoc'
+                on_release: app.root.current = 'help'
+
+<DecryptionScreen>:
+    name: 'decrypt'
+    user_message_text_input: user_message
+    user_key_text_input: user_key
+    hidden_message_text: hidden_message
+    user_cipher_text: user_cipher
+
+    GridLayout:
+        rows: 4
+        padding: 5
+
+        BoxLayout:
+            size_hint_y: .2
+            orientation: 'vertical'
+            Label:
+                text: 'Wybierz metode deszyfrowania:'
+                size_hint_y: .35
+            Spinner:
+                id: user_cipher
+                text: 'Szyfr afiniczny'
+                values: ('Szyfr afiniczny', 'Szyfr Cezara', 'Szyfr podstawieniowy', 'Szyfr kolumnowy', 'Szyfr Vigenere')
+
+        BoxLayout:
+            size_hint_y: .35
+            orientation: 'vertical'
+            BoxLayout:
+                size_hint_y: .3
+                Label:
+                    text: 'Wprowadz wiadomosc'
+                Label:
+                    text: 'Wprowadz klucz'
+            BoxLayout:
+                size_hint_y: .7
+                TextInput:
+                    id: user_message
+                TextInput:
+                    id: user_key
+
+        BoxLayout:
+            ScrollView:
+                size_hint: 1, 1
+                GridLayout:
+                    size_hint: 1, None
+                    height: self.minimum_height
+                    cols: 1
+                    Label:
+                        id: hidden_message
+                        size_hint: 1, None
+                        text_size: self.width, None
+                        height: self.texture_size[1]
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_x: .2
+                spacing: 5
+                Label:
+                CustomButton:
+                    text: 'Zatwierdz'
+                    on_press: root.hide_message(user_message, user_key)
+                CustomButton:
+                    text: 'Wyczysc wiadomosc'
+                    on_press: root.clear_message()
+                CustomButton:
+                    text: 'Wyczysc klucz'
+                    on_press: root.clear_key()
+                CustomButton:
+                    text: 'Kopiuj szyfrogram'
+                    on_press: Clipboard.copy(hidden_message.text)
+                Label:
+    
+        BoxLayout:
+            size_hint_y: .15
+            CustomButton:
+                text: 'Szyfrowanie'
+                on_release: app.root.current = 'encrypt'
+            CustomButton:
+                text: 'Deszyfrowanie'
+                on_release: app.root.current = 'decrypt'
+            CustomButton:
+                text: 'Kryptoanaliza'
+                on_release: app.root.current = 'analysis'
+            CustomButton:
+                text: 'Analiza czestosci'
+                on_release: app.root.current = 'frequency'
+            CustomButton:
+                text: 'Pomoc'
+                on_release: app.root.current = 'help'
+
+<CryptanalysisScreen>:
+    name: 'analysis'
+    user_ciphertext_text: user_ciphertext
+    user_encryption_method: user_method
+    translated_message_text: translated_message
+    translated_message_key: translated_key
+
+    GridLayout:
+        padding: 5
+        rows: 4
+
+        BoxLayout:
+            size_hint_y: .2
+            orientation: 'vertical'
+            Label:
+                text: 'Wybierz metode kryptoanalizy:'
+                size_hint_y: .35
+            Spinner:
+                id: user_method
+                text: 'Szyfr afiniczny'
+                values: ('Szyfr afiniczny', 'Szyfr Cezara', 'Szyfr podstawieniowy', 'Szyfr kolumnowy', 'Szyfr Vigenere')
+
+        BoxLayout:
+            size_hint_y: .35
+            orientation: 'vertical'
+            Label:
+                text: 'Wprowadz szyfrogram'
+                size_hint_y: .3
+            TextInput:
+                size_hint_y: .7
+                id: user_ciphertext
+
+        BoxLayout:
+            ScrollView:
+                size_hint: 1, 1
+                GridLayout:
+                    size_hint: 1, None
+                    height: self.minimum_height
+                    cols: 1
+                    Label:
+                        id: translated_message
+                        size_hint: 1, None
+                        text_size: self.width, None
+                        height: self.texture_size[1]
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_x: .2
+                spacing: 5
+                Label:
+                    text: 'Klucz:'
+                Label:
+                    id: translated_key
+                    valign: 'middle'
+                    halign: 'center'
+                CustomButton:
+                    text: 'Zatwierdz'
+                    on_press: root.break_cipher(user_ciphertext)
+                CustomButton:
+                    text: 'Wyczysc wiadomosc'
+                    on_press: root.clear_message()
+                CustomButton:
+                    text: 'Kopiuj szyfrogram'
+                    on_press: Clipboard.copy(translated_message.text)
+                Label: 
+                    size_hint_y: .11
+
+        BoxLayout:
+            size_hint_y: .15
+            CustomButton:
+                text: 'Szyfrowanie'
+                on_release: app.root.current = 'encrypt'
+            CustomButton:
+                text: 'Deszyfrowanie'
+                on_release: app.root.current = 'decrypt'
+            CustomButton:
+                text: 'Kryptoanaliza'
+                on_release: app.root.current = 'analysis'
+            CustomButton:
+                text: 'Analiza czestosci'
+                on_release: app.root.current = 'frequency'
+            CustomButton:
+                text: 'Pomoc'
+                on_release: app.root.current = 'help'
+
+<BarScreen>:
+    name: 'frequency'
+    bar: bar
+    user_message_graph: user_message
+
+    GridLayout:
+        rows: 3
+        padding: 5
+        spacing: 3
+
+        BoxLayout:
+            size_hint_y: .11
+            Label:
+                text: 'Wprowadz wiadomosc'
+            TextInput:
+                id: user_message
+            CustomButton:
+                text: 'Zatwierdz'
+                on_release: root.generate_graph(user_message)
+
+        BoxLayout:
+            id: bar
+    
+        BoxLayout:
+            size_hint_y: .11
+            CustomButton:
+                text: 'Szyfrowanie'
+                on_release: app.root.current = 'encrypt'
+            CustomButton:
+                text: 'Deszyfrowanie'
+                on_release: app.root.current = 'decrypt'
+            CustomButton:
+                text: 'Kryptoanaliza'
+                on_release: app.root.current = 'analysis'
+            CustomButton:
+                text: 'Analiza czestosci'
+                on_release: app.root.current = 'frequency'
+            CustomButton:
+                text: 'Pomoc'
+                on_release: app.root.current = 'help'
+
+<HelpScreen>:
+    name: 'help'
+    text: text
+    GridLayout:
+        rows: 2
+        spacing: 5
+        padding: 5
+
+        ScrollView:
+            size_hint: 1, .8
+            GridLayout:
+                size_hint: 1, None
+                height: self.minimum_height
+                cols: 1
+                Label:
+                    id: text
+                    size_hint: 1, None
+                    text_size: self.width, None
+                    height: self.texture_size[1]
+        
+        BoxLayout:
+            size_hint_y: .08
+            CustomButton:
+                text: 'Szyfrowanie'
+                on_release: app.root.current = 'encrypt'
+            CustomButton:
+                text: 'Deszyfrowanie'
+                on_release: app.root.current = 'decrypt'
+            CustomButton:
+                text: 'Kryptoanaliza'
+                on_release: app.root.current = 'analysis'
+            CustomButton:
+                text: 'Analiza czestosci'
+                on_release: app.root.current = 'frequency'
+            CustomButton:
+                text: 'Pomoc'
+                on_release: app.root.current = 'help'
+            

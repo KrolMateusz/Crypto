@@ -1,0 +1,19 @@
+Pytanie do projektu aplikacji, co dokładnie wrzucić, jakie wymagania,
+czy ma być architektura aplikacji, jak wypisać wymagania użytkownika:
+
+wymagania użytkownika, zrobić wstęp do czego aplikacja ma być, cel aplikacji predefiniuje
+szczegółowe wymagania, mało jest programów celów, aplikacja ma na celu poufność
+tajność wiadomości nie, bardziej w celu edukacyjnym, pokazanie możliwości, techink,
+specyfiki kryptologii, z drugiej strony specyficznych użytkowań towarzyskich.
+
+Atchitektura aplikacja, w jaki sposób algorytmy mapują wymagania, cele aplikacji,
+architektury.
+
+Pytanie o testy aplikacji, czy wykonać testy jednostkowe:
+
+Testy jednostkowe dobrze, ale nie wystarczy. Testowanie, czy nasze cele
+zostały spełnione, wymagania funkcjonalne, niefunkcjonalne zostały spełnione?
+
+Pytanie o helpa w aplikacji, co ma zawierać:
+
+Kwestia w wymaganiach, czy będzie potrzebny, czy nie.

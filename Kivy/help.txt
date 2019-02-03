@@ -1,0 +1,62 @@
+Aplikacja do szyfrowania, deszyfrowania oraz kryptoanalizy algorytmow szyfrujacych.
+
+1. Pierwszy ekran sluzy do szyfrowania wiadomosci. Szyfrowanie polega na ukryciu
+tekstu jawnego w tekst tajny, tak tylko odbiorca byl w stanie odczytac zaszyfrowana
+wiadomosc.
+1.1 Przy pomocy listy mozna wybrac jeden z pieciu dostepnych metod szyfrowania.
+Sa to: szyfr afiniczny, szyfr Cezara, szyfr podstawieniowy, kolumnowy szyfr 
+przestawieniowy i szyfr Vigenere'a. Kazda z tych metod wymaga klucza do zaszyfrowania
+wiadomosci. 
+1.2 W odpowiednim polu tekstowym uzytkownik ma mozliwosc wprowadzenia wiadomosci. Moze
+sie ona skladac z dowolnych liter alfabetu lacinskiego, z ktorego korzysta jezyk angielski.
+1.3 W polu tekstowym klucza nalezy wprowadzic wartosc, ktora zostanie wykorzystana do
+zaszyfrowania wiadomosci.
+Dla szyfru afinicznego powinna byc to liczba, ktora jest wynikiem
+operacji klucz A * 26 + klucz B, gdzie NWD(klucz A, 26) = 1. Gdy uzytkownik poda klucz,
+ktory nie spelnia powyzszej operacji, zostaje wygenerowany losowy klucz spelniajacy operacje.
+W przypadku szyfru Cezara klucz powinien zawierac sie w przedziale 1 <= klucz <= 25. Liczba 
+mozliwych kluczy dla tej metody wynosi 25.
+Dla szyfru podstawieniowego kluczem jest alfabet lacinski uporzadkowany w losowej kolejnosci.
+Jesli wprowadzony klucz jest nieprawidlowy, aplikacja generuje nowy, prwaidlowy klucz,
+ktory jest wyswietlany uzytkownikowi.
+Dla kolumnowego szyfru przestawieniowego kluczem jest liczba z przedzialu
+1 <= klucz <= dlugosc wiadomosci. Nalezy pamietac jednak, ze jezeli wartosc klucza jest wieksza
+niez polowa dlugosci wiadomosci to pewna czesc tekstu jawnego pozostanie niezaszyfrowana.
+Dla szyfru Vigenere'a klucz jest tekstem w oparciu o ktory wiadomosc zostanie zaszyfrowana.
+Dlugosc klucza nie moze byc wieksza niz dlugosc szyfrowanej wiadomosci. Klucz moze byc 
+dowolnym slowem.
+1.4 Przycisk zatwierdz zwraca zaszyfrowana wiadomosc z wykorzystaniem wybranej metody i
+wprowadzonego klucza.
+1.5 Przycisk wyczysc wiadomosc sluzy do usuniecia znakow z pola wiadomosci.
+1.6 Przycisk wyczysc klucz sluzy do usuniecia znakow z pola klucza.
+
+2. Drugi ekran sluzy do odszyfrowywania wiadomosci z wykorzystaniem wprowadzonego klucza 
+i wybranej metody. Deszyfrowanie polega na odwroceniu procesu szyfrowania, tak aby
+odczytac wiadomosc ukryta przez nadawce.
+2.1 Przy pomocy listy mozemy wybrac metode do odszyfrowania wiadomosci. Podobnie, jak w
+przypadku szyfrowania dostepnych jest piec metod.
+2.2 W polu tekstowym uzytkownik wprowadza tekst do odszyfrowania.
+2.3 W polu tekstowym dla klucza nalezy wprowadzic klucz, jaki zastosowano do szyfrowania
+wiadomosci.
+2.4 Przycisk zatwierdz zwraca tekst jawny z wykorzystaniem wybranej metody oraz klucza.
+2.5 Przycisk wyczysc wiadomosc sluzy do usuniecia tekstu wiadomosci.
+2.6 Przycisk wyczysc klucz sluzy do usuniecia znakow w polu tekstowym klucza.
+
+3. Trzeci ekran sluzy do kryptoanalizy zaszyfrowanej wiadomosci. Polega ona na zlamaniu
+szyfru i odczytaniu wiadomosci, nie posiadajac klucza wbrew woli nadawcy wiadomosci.
+Kryptoanaliza wymaga wiekszej ilosci obliczen niz szyfrowanie, czy deszyfrowanie i nie
+gwarantuje poprawnosci wiadomosci wynikowej.
+3.1 Przy pomocy listy wybieramy metode kryptoanalizy, jesli wiemy, ze tekst tajny zostal
+zaszyfrowany wykorzystujac ten algorytm kryptograficzny, ale nie znany jest klucz
+szyfrowania.
+3.2 Pole tekstowe sluzy do wprowadzenia wiadomosci, dla ktorej zostanie przeprowadzona
+kryptoanaliza z wykorzystaniem wybranej metody.
+3.3 Wyswietlany jest klucz, ktorym wiadomosc zostala zaszyfrowana.
+3.4 Przycisk zatwierdz uruchamia proces kryptoanalizy tekstu tajnego.
+3.5 Przycisk wyczysc wiadomosc sluzy do usuwania wiadomosci z pola tekstowego.
+
+4. Czwarty ekran sluzy wspomaga proces statystycznej analizy czestosci liter w tekscie.
+Po wpisaniu wiadomosci i wcisnieciu przycisku zatwierdz generowane sa dwa wykresy.
+Pierwszy z nich pokazuje czestosc wytapienia (w procentach) litery w wiadomosci,
+natomiast drugi z nich pokazuje czestosci wystapienia litery w jezyku angielskim.
+Na podstawie takiego grafu mozna przeprowadzic kryptoanalize szyfrow podstawieniowych.

@@ -1,0 +1,41 @@
+#:kivy 1.10.0
+#:import SlideTransition kivy.uix.screenmanager.SlideTransition
+
+<Manager>:
+    transition: SlideTransition()
+
+    Patient:
+        name: 'Patient'
+
+    Progress:
+        name: 'Progress'
+
+<Patient>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        Label:
+            text: 'Patient Screen'
+            font_size: '30sp'
+
+        Button:
+            size_hint: 1, 0.1
+            text: 'Goto Progress Screen'
+            on_release:
+                root.manager.current = 'Progress'
+
+<Progress>:
+    bar: bar
+
+    BoxLayout:
+        id: bar
+
+    Button:
+        text:'Patient Menu'
+        font_size: 20
+        bold: True
+        size_hint: None, None
+        size: 300, 50
+        pos_hint: {'center_x': .5, 'center_y': .1 }
+        color: 1, 1, 1, 1
+        on_press: root.manager.current = 'Patient'

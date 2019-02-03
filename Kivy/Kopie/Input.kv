@@ -1,0 +1,70 @@
+#:kivy 1.10.0
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+ScreenManagement:
+    transition: FadeTransition()
+    EncryptionScreen:
+    DecryptionScreen:
+
+<EncryptionScreen>:
+    name: 'encrypt'
+
+    GridLayout:
+        rows: 2
+
+        BoxLayout:
+            orientation: vertical
+
+        Button:
+            text: 'Decryption screen'
+            size_hint_x: None
+            size_hint_y: None
+            size: 300, 300
+            on_release: app.root.current = 'decrypt'
+
+
+<DecryptionScreen>:
+    name: 'decrypt'
+
+    Button:
+        text: 'Encryption screen'
+        size: 50, 50
+        on_release: app.root.current = 'encrypt'
+
+<InputDB>:
+    orientation: 'vertical'
+    padding: 10
+    spacing: 10
+    user_message_text_input: user_message
+    user_key_text_input: user_key
+    hidden_message_text: hidden_message
+    user_cipher_text: user_cipher
+
+    BoxLayout:
+        Label:
+            text: 'Enter message'
+            size_hint_y: .1
+        TextInput:
+            id: user_message
+            size_hint_y: .3
+        Label:
+            text: 'Enter key'
+            size_hint_y: .1
+        TextInput:
+            id: user_key
+            size_hint_y: .3
+
+    BoxLayout:
+        Label:
+            id: hidden_message
+            text_size: self.size
+        Button:
+            text: 'Submit'
+            on_press: 
+                root.hide_message(user_message, user_key)
+    
+    BoxLayout:
+        Spinner:
+            id: user_cipher
+            text: 'Affine cipher'
+            values: ('Affine cipher', 'Cesar cipher', 'Substition cipher', 'Transposition cipher', 'Vigenere cipher')
